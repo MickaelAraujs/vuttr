@@ -32,21 +32,13 @@
 .tools-container .tool-card .links .remove {
     display: flex;
     align-items: center;
+    color: #244AA8;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
 }
 
 .tools-container .tool-card .tool-description {
     margin-top: 5px;
     font-size: 16px;
-}
-
-.tools-container .tool-card .tag-list {
-    list-style: none;
-    display: flex;
-    margin-top: 5px;
-    font-weight: bold;
-}
-
-.tools-container .tool-card .tag-list li:not(:first-child) {
-    margin-left: 5px;
-    margin-bottom: 5px;
 }

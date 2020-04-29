@@ -1,0 +1,11 @@
+.tools-container .tool-card .tag-list {
+    list-style: none;
+    display: flex;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.tools-container .tool-card .tag-list li:not(:first-child) {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}

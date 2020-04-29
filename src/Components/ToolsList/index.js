@@ -1,80 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
+
+import Tags from '../Tags';
+import RemoveCard from '../RemoveCard';
+import api from '../../services/api';
 
 import './styles.css';
 
 export default function ToolsList() {
+    const [tools, setTools] = useState([]);
+
+    const [active, setActive] = useState(false);
+    const [data, setData] = useState({});
+    
+    useEffect(loadTools, []);
+
+    async function loadTools() {
+        const response = await api.get('/tools');
+        setTools(response.data);
+    }
+
+    function handleRemove(title, id) {
+        setData({
+            title,
+            id
+        });
+        setActive(true);
+    }
+
     return (
         <div className="tools-container">
-            <div className="tool-card">
-                <div className="links">
-                    <h3><a href="#">json-server</a></h3>
-                    
-                    <a className='remove' href="#">
-                        <FiX size={18} color='#244AA8' />
-                        remove
-                    </a>
+            { tools.map(tool => (
+                <div key={tool.id} className="tool-card">
+                    <div className="links">
+                        <h3><a href={tool.link}>{tool.title}</a></h3>
+                        
+                        <button
+                        onClick={() => handleRemove(tool.title, tool.id)}
+                        className='remove'>
+                            <FiX size={18} color='#244AA8' />
+                            remove
+                        </button>
+                    </div>
+
+                    <p className="tool-description">
+                        {tool.description}
+                    </p>
+
+                    <Tags tags={tool.tags} />
                 </div>
+            )) }
 
-                <p className="tool-description">
-                    Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.
-                </p>
-
-                <ul className="tag-list">
-                    <li>#api</li>
-                    <li>#json</li>
-                    <li>#schema</li>
-                    <li>#node</li>
-                    <li>#github</li>
-                    <li>#rest</li>
-                </ul>
-            </div>
-
-            <div className="tool-card">
-                <div className="links">
-                    <h3><a href="#">json-server</a></h3>
-                    <a className='remove' href="#">
-                        <FiX size={18} color='#244aa8' />
-                        remove
-                    </a>
-                </div>
-
-                <p className="tool-description">
-                    Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.
-                </p>
-
-                <ul className="tag-list">
-                    <li>#api</li>
-                    <li>#json</li>
-                    <li>#schema</li>
-                    <li>#node</li>
-                    <li>#github</li>
-                    <li>#rest</li>
-                </ul>
-            </div>
-
-            <div className="tool-card">
-                <div className="links">
-                    <h3><a href="#">json-server</a></h3>
-                    <a className='remove' href="#">
-                        <FiX size={18} color='#244aa8' />
-                        remove
-                    </a>
-                </div>
-
-                <p className="tool-description">
-                    Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.
-                </p>
-
-                <ul className="tag-list">
-                    <li>#api</li>
-                    <li>#json</li>
-                    <li>#schema</li>
-                    <li>#node</li>
-                    <li>#github</li>
-                    <li>#rest</li>
-                </ul>
-            </div>
+            { !active ? '' : <RemoveCard setActive={setActive} data={data} /> }
         </div>
     );
 }
