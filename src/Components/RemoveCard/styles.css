@@ -1,0 +1,93 @@
+.remove-card-container {
+    width: 100%;
+    height: 830px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: get-dark 0.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+.remove-card-container .remove-card {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 20px 25px #0000001A;
+    border: 1px solid #EBEAED;
+    border-radius: 5px;
+    opacity: 1;
+    width: 387px;
+    height: 135px;
+    position: fixed;
+    top: 40%;
+    animation: slide-up 0.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+.remove-card-container .remove-card .close-area {
+    display: flex;
+    margin-top: 15px;
+}
+
+.remove-card-container .remove-card .close-area .close-window {
+    display: flex;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.remove-card-container .remove-card span {
+    color: #000000;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.remove-card-container .remove-card p {
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 16px;
+}
+
+.remove-card-container .remove-card .buttons {
+    display: flex;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.remove-card-container .remove-card .buttons button {
+    width: 100px;
+    height: 30px;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 5px;
+    color: #F5F4F6;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 15px 20px #00000012;
+    margin-left: 10px;
+}
+
+.remove-card-container .remove-card .buttons .cancel { background: #9AAEF7 0% 0% no-repeat padding-box; }
+.remove-card-container .remove-card .buttons .remove { background: #244AA8 0% 0% no-repeat padding-box; }
+
+@keyframes slide-up {
+    from {
+        top: 45%;
+    } to {
+        top: 40%;
+    }
+}
+
+@keyframes get-dark {
+    from {
+        background-color: transparent;
+    } to {
+        background-color: rgba(0,0,0, 0.7);
+    }
+}
