@@ -1,6 +1,6 @@
 .add-card-container .add-card {
     width: 475px;
-    height: 565px;
+    height: 555px;
     animation: slide-up-add 0.5s ease-in;
     animation-fill-mode: forwards;
 }
