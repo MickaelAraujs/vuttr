@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiSearch, FiPlus } from 'react-icons/fi';
+
+import AddCard from '../AddCard';
 
 import './styles.css';
 
 export default function Header() {
+    const [active, setActive] = useState(false);
+
     return (
         <div className='header-container'>
             <div className="title-container">
@@ -26,11 +30,13 @@ export default function Header() {
                     </div>
                 </div>
 
-                <button className='add-button'>
+                <button className='add-button' onClick={() => setActive(true)}>
                     <FiPlus size={18} color='#F5F4F6' style={{ marginRight: 3 }} />
                     Add
                 </button>
             </div>
+            
+            { !active ? '' : <AddCard setActive={setActive} /> }
         </div>
     );
 }

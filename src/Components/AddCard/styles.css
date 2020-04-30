@@ -1,0 +1,93 @@
+.add-card-container .add-card {
+    width: 475px;
+    height: 565px;
+    animation: slide-up-add 0.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+.add-card-container .add-card .icon-area {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.add-card-container .add-card .icon-area span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.add-card-container .add-card form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 415px;
+}
+
+.add-card-container .add-card form .input-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.add-card-container .add-card form .input-area label {
+    font-size: 16px;
+    text-transform: capitalize;
+    margin-top: 15px;
+}
+
+.add-card-container .add-card form .input-area input {
+    width: 100%;
+    height: 35px;
+    margin-top: 5px;
+    background: #F5F4F6 0% 0% no-repeat padding-box;
+    border: 1px solid #EBEAED;
+    border-radius: 5px;
+    opacity: 1;
+    font-size: 16px;
+    text-indent: 10px;
+}
+
+.add-card-container .add-card form .input-area textarea {
+    margin-top: 5px;
+    padding: 3px;
+    background: #F5F4F6 0% 0% no-repeat padding-box;
+    border: 1px solid #EBEAED;
+    border-radius: 5px;
+    opacity: 1;
+    font-size: 16px;
+    text-indent: 10px;
+    resize: none;
+}
+
+.add-card-container .add-card form .buttons {
+    width: 100%;
+    margin-top: 25px;
+}
+
+.add-card-container .add-card form button {
+    margin-top: 10px;
+    width: 100%;
+    height: 35px;
+    border: 0;
+    border-radius: 5px;
+    background: #244AA8 0% 0% no-repeat padding-box;
+    opacity: 1;
+    cursor: pointer;
+    box-shadow: 0px 15px 20px #00000012;
+    color: #F5F4F6;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.add-card-container .add-card form .cancel { background: #9AAEF7 0% 0% no-repeat padding-box; }
+.add-card-container .add-card form .add { background: #244AA8 0% 0% no-repeat padding-box; }
+
+@keyframes slide-up-add {
+    from {
+        top: 15%;
+    } to {
+        top: 10%;
+    }
+}
