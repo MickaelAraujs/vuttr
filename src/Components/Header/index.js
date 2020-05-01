@@ -5,8 +5,10 @@ import AddCard from '../AddCard';
 
 import './styles.css';
 
-export default function Header() {
+export default function Header({ tools, setTools }) {
     const [active, setActive] = useState(false);
+
+    const updateTools = data => setTools([...tools, data]);
 
     return (
         <div className='header-container'>
@@ -35,8 +37,8 @@ export default function Header() {
                     Add
                 </button>
             </div>
-            
-            { !active ? '' : <AddCard setActive={setActive} /> }
+        
+            { !active ? '' : <AddCard setActive={setActive} update={updateTools} /> }
         </div>
     );
 }

@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 
 import Tags from '../Tags';
 import RemoveCard from '../RemoveCard';
-import api from '../../services/api';
 
 import './styles.css';
 
-export default function ToolsList() {
-    const [tools, setTools] = useState([]);
-
+export default function ToolsList({ tools, setTools }) {
     const [active, setActive] = useState(false);
     const [data, setData] = useState({});
-    
-    useEffect(loadTools, []);
-
-    async function loadTools() {
-        const response = await api.get('/tools');
-        setTools(response.data);
-    }
 
     function handleRemove(title, id) {
         setData({
@@ -26,6 +16,11 @@ export default function ToolsList() {
             id
         });
         setActive(true);
+    }
+
+    function updateTools(id) {
+        const filteredTools = tools.filter(tool => tool.id !== id);
+        setTools(filteredTools);
     }
 
     return (
@@ -51,7 +46,7 @@ export default function ToolsList() {
                 </div>
             )) }
 
-            { !active ? '' : <RemoveCard setActive={setActive} data={data} /> }
+            { !active ? '' : <RemoveCard setActive={setActive} data={data} update={updateTools} /> }
         </div>
     );
 }

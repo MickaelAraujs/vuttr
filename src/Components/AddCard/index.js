@@ -1,12 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
+
+import api from '../../services/api';
+import style from './inputStyle';
 
 import './styles.css';
 
-export default function AddCard({ setActive }) {
+export default function AddCard({ setActive, update }) {
+    const [toolName, setToolName] = useState('');
+    const [toolLink, setToolLink] = useState('');
+    const [toolDescription, setToolDescription] = useState('');
+    const [tags, setTags] = useState('');
 
-    function handleSubmit(e) {
+    const [error, setError] = useState(false);
+
+    async function handleSubmit(e) {
         e.preventDefault();
+
+        const validator = handleValidation();
+
+        if (validator) {
+            setError(false);
+        
+            const tagsAsArray = tags.split(',');
+            
+            const data = {
+                title: toolName,
+                link: toolLink,
+                description: toolDescription,
+                tags: tagsAsArray
+            };
+
+            setToolName('');
+            setToolLink('');
+            setToolDescription('');
+            setTags('');
+
+            const response = await api.post('/tools', data, { headers: { 'Content-Type': 'application/json' } });
+
+            setActive(false);
+            update(response.data);
+        }
+
+        return;
+    }
+
+    function handleValidation() {
+         if (toolName === '' || toolLink === '' || toolDescription === '' || tags === '' ) {
+            setError(true);
+            return false;
+         }
+
+         return true;
     }
 
     return (
@@ -20,22 +65,50 @@ export default function AddCard({ setActive }) {
                 <form onSubmit={handleSubmit}>
                     <div className='input-area'>
                         <label>tool name</label>
-                        <input type='text' name='name' />
+                        <input
+                        style={(error && toolName === '') ? style.focus : {}}
+                        type='text'
+                        name='name'
+                        value={toolName}
+                        onChange={e => setToolName(e.target.value)}
+                        />
+                        { (error && toolName === '') ? <span>Tool name is required!</span> : ''}
                     </div>
                     
                     <div className='input-area'>
                         <label>tool link</label>
-                        <input type='text' name='link' />
+                        <input
+                        style={(error && toolLink === '') ? style.focus : {}}
+                        type='text'
+                        name='link'
+                        value={toolLink}
+                        onChange={e => setToolLink(e.target.value)}
+                        />
+                        { (error && toolLink === '') ? <span>Tool link is required!</span> : ''}
                     </div>
 
                     <div className='input-area'>
                         <label>tool description</label>
-                        <textarea name='description' cols='20' rows='5'   />
+                        <textarea
+                        style={(error && toolDescription === '') ? style.focus : {}}
+                        name='description'
+                        cols='20' rows='5'
+                        value={toolDescription}
+                        onChange={e => setToolDescription(e.target.value)}
+                        />
+                        { (error && toolDescription === '') ? <span>Tool description is required!</span> : ''}
                     </div>
 
                     <div className='input-area'>
                         <label>Tags</label>
-                        <input type='text' name='tags'/>
+                        <input
+                        style={(error && tags === '') ? style.focus : {}}
+                        type='text'
+                        name='tags'
+                        value={tags}
+                        onChange={e => setTags(e.target.value)}
+                        />
+                        { (error && tags === '') ? <span>Tags field is required!</span> : ''}
                     </div>
 
                     <div className='buttons'>

@@ -1,9 +1,19 @@
 import React from 'react';
 import { FiX } from 'react-icons/fi';
 
+import api from '../../services/api';
+
 import './styles.css';
 
-export default function RemoveCard({ setActive, data }) {
+export default function RemoveCard({ setActive, data, update }) {
+    
+    async function deleteTool() {
+        await api.delete(`/tools/${data.id}`);
+        
+        setActive(false);
+        update(data.id);
+    }
+
     return (
         <div className='remove-card-container'>
             <div className='remove-card'>
@@ -19,7 +29,7 @@ export default function RemoveCard({ setActive, data }) {
 
                 <div className='buttons'>
                     <button className='cancel' onClick={() => setActive(false)}>Cancel</button>
-                    <button className='remove'>Yes, remove</button>
+                    <button className='remove' onClick={deleteTool}>Yes, remove</button>
                 </div>
             </div>
         </div>

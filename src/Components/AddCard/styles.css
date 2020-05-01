@@ -1,8 +1,8 @@
 .add-card-container .add-card {
     width: 475px;
-    height: 555px;
     animation: slide-up-add 0.5s ease-in;
     animation-fill-mode: forwards;
+    padding-bottom: 20px;
 }
 
 .add-card-container .add-card .icon-area {
@@ -34,7 +34,16 @@
 .add-card-container .add-card form .input-area label {
     font-size: 16px;
     text-transform: capitalize;
-    margin-top: 15px;
+    margin-top: 10px;
+}
+
+.add-card-container .add-card form .input-area span {
+    font-size: 14px;
+    text-align: right;
+    color: #F95E5A;
+    margin-right: 5px;
+    margin-top: 5px;
+    text-transform: capitalize;
 }
 
 .add-card-container .add-card form .input-area input {
@@ -63,7 +72,7 @@
 
 .add-card-container .add-card form .buttons {
     width: 100%;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 .add-card-container .add-card form button {
@@ -86,8 +95,8 @@
 
 @keyframes slide-up-add {
     from {
-        top: 15%;
-    } to {
         top: 10%;
+    } to {
+        top: 6%;
     }
 }
