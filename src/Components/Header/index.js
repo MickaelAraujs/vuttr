@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FiSearch, FiPlus } from 'react-icons/fi';
 
 import AddCard from '../AddCard';
@@ -16,19 +16,23 @@ export default function Header() {
     const [active, setActive] = useState(false);
     const [isCheckboxActive, setIsCheckboxActive] = useState(true);
     const [search, setSearch] = useState('');
-
-    async function handleSearch() {
-        if (isCheckboxActive) {
-            const response = await api.get(`/tools?tags_like=${search}`);
-            setTools(response.data);
-        } else {
-            const response = await api.get(`/tools?q=${search}`);
-            setTools(response.data);
+    
+    useEffect(() => {
+        async function handleSearch() { 
+            if (isCheckboxActive) {
+                const response = await api.get(`/tools?tags_like=${search}`);
+                setTools(response.data);
+            } else {
+                const response = await api.get(`/tools?q=${search}`);
+                setTools(response.data);
+            }
+    
+            setSearchTag(search); 
+            setBackgroundValue('#FFBB43');
         }
 
-        setBackgroundValue('#FFBB43');
-        setSearchTag(search); 
-    }
+        handleSearch();
+    }, [search, isCheckboxActive, setTools, setSearchTag, setBackgroundValue]);
 
     return (
         <div className='header-container'>
@@ -40,7 +44,7 @@ export default function Header() {
             <div className='input-container'>
                 <div className='input-area'>
                     <div className='search-container'>
-                        <button className='icon-button' onClick={handleSearch}>
+                        <button className='icon-button'>
                             <FiSearch size={18} color='#244AA8' />
                         </button>
 
