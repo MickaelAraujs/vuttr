@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
 
 import Tags from '../Tags';
 import RemoveCard from '../RemoveCard';
 
+import { ToolsContext } from '../../contexts/Tools';
+import api from '../../services/api';
+
 import './styles.css';
 
-export default function ToolsList({ tools, setTools }) {
+export default function ToolsList() {
+    const { tools, setTools } = useContext(ToolsContext);
+
     const [active, setActive] = useState(false);
     const [data, setData] = useState({});
+
+    useEffect(() => {
+        async function loadTools() {
+            const response = await api.get('/tools');
+            setTools(response.data);
+        }
+
+        loadTools();
+    }, [setTools]);
 
     function handleRemove(title, id) {
         setData({
@@ -17,17 +31,12 @@ export default function ToolsList({ tools, setTools }) {
         });
         setActive(true);
     }
-
-    function updateTools(id) {
-        const filteredTools = tools.filter(tool => tool.id !== id);
-        setTools(filteredTools);
-    }
-
+    
     return (
-        <div className="tools-container">
+        <div className='tools-container'>
             { tools.map(tool => (
-                <div key={tool.id} className="tool-card">
-                    <div className="links">
+                <div key={tool.id} className='tool-card'>
+                    <div className='links'>
                         <h3><a href={tool.link}>{tool.title}</a></h3>
                         
                         <button
@@ -38,15 +47,15 @@ export default function ToolsList({ tools, setTools }) {
                         </button>
                     </div>
 
-                    <p className="tool-description">
+                    <p className='tool-description'>
                         {tool.description}
                     </p>
 
-                    <Tags tags={tool.tags} />
+                    <Tags tags={tool.tags}/>
                 </div>
             )) }
 
-            { !active ? '' : <RemoveCard setActive={setActive} data={data} update={updateTools} /> }
+            { !active ? '' : <RemoveCard setActive={setActive} data={data} /> }
         </div>
     );
 }

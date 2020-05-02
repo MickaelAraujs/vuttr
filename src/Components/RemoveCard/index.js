@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FiX } from 'react-icons/fi';
 
+import { ToolsContext } from '../../contexts/Tools';
 import api from '../../services/api';
 
 import './styles.css';
 
-export default function RemoveCard({ setActive, data, update }) {
+export default function RemoveCard({ setActive, data }) {
+    const { tools, setTools } = useContext(ToolsContext);
     
     async function deleteTool() {
         await api.delete(`/tools/${data.id}`);
-        
+
+        const filteredTools = tools.filter(tool => tool.id !== data.id);
+        setTools(filteredTools);
+
         setActive(false);
-        update(data.id);
     }
 
     return (

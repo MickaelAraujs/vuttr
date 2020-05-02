@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { TagContext } from '../../contexts/Tag';
 
 import './styles.css';
 
 export default function Tags({ tags }) {
+    const { backgroundValue, searchTag } = useContext(TagContext); 
+
     return (
-        <ul className="tag-list">
+        <ul className='tag-list'>
             { tags.map(tag => (
-                <li key={tag}> {`#${tag}`} </li>
+
+                <li
+                key={tag}
+                style={tag === searchTag ? { backgroundColor: backgroundValue } : {}}
+                >
+                    #{tag}
+                </li>
+
             )) }
         </ul>
     );
