@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { FiSearch, FiPlus } from 'react-icons/fi';
 
 import AddCard from '../AddCard';
@@ -17,18 +17,24 @@ export default function Header() {
     const [isCheckboxActive, setIsCheckboxActive] = useState(true);
     const [search, setSearch] = useState('');
     
+    let time = useRef(null);
+
     useEffect(() => {
-        async function handleSearch() { 
-            if (isCheckboxActive) {
-                const response = await api.get(`/tools?tags_like=${search}`);
-                setTools(response.data);
-            } else {
-                const response = await api.get(`/tools?q=${search}`);
-                setTools(response.data);
-            }
-    
-            setSearchTag(search); 
-            setBackgroundValue('#FFBB43');
+        function handleSearch() {
+            clearInterval(time.current);
+
+            time.current = setTimeout(async () => {
+                if (isCheckboxActive) {
+                    const response = await api.get(`/tools?tags_like=${search}`);
+                    setTools(response.data);
+                } else {
+                    const response = await api.get(`/tools?q=${search}`);
+                    setTools(response.data);
+                }
+        
+                setSearchTag(search); 
+                setBackgroundValue('#FFBB43');
+            }, 500);
         }
 
         handleSearch();
