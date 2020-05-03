@@ -63,3 +63,27 @@
         top: 40%;
     }
 }
+
+/* Break Points */
+
+/* Smartphone Screen */
+
+@media (max-width: 425px) {
+    .remove-card-container .remove-card {
+        width: 85%;
+    }
+
+    .remove-card-container .remove-card span {
+        font-size: 16px;
+    }
+
+    .remove-card-container .remove-card p {
+        font-size: 14px;
+    }
+
+    .remove-card-container .remove-card .buttons button {
+        width: 85px;
+        height: 25px;
+        font-size: 12px;
+    }
+}

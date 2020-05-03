@@ -49,3 +49,29 @@ body, body * {
         background-color: rgba(0,0,0, 0.7);
     }
 }
+
+/* Break Points */
+
+/* Tablet Screen */
+
+@media (max-width: 768px) and (min-width: 426px) {
+    .container {
+        width: 100vw;
+    }
+
+    .add-card-container, .remove-card-container {
+        width: 100vw;
+    }
+}
+
+/* Smartphone Screen */
+
+@media (max-width: 1024px) {
+    .container {
+        width: 100vw;
+    }
+
+    .add-card-container, .remove-card-container {
+        width: 100vw;
+    }
+}
