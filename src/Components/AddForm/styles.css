@@ -72,3 +72,45 @@
 
 .add-card-container .add-card form .cancel { background: #9AAEF7 0% 0% no-repeat padding-box; }
 .add-card-container .add-card form .add { background: #244AA8 0% 0% no-repeat padding-box; }
+
+/* Break Points */
+
+/* Tablet Screen */
+
+@media (max-width: 768px) and (min-width: 426px) {
+    .add-card-container .add-card form {
+        width: 85%;
+    }
+}
+
+/* Smartphone Screen */
+
+@media (max-width: 425px) {
+    .add-card-container .add-card form {
+        width: 85%;
+    }
+
+    .add-card-container .add-card form .input-area label {
+        font-size: 14px;
+    }
+
+    .add-card-container .add-card form .input-area span {
+        font-size: 12px;
+    }
+
+    .add-card-container .add-card form .input-area input {
+        height: 25px;
+        font-size: 14px;
+    }
+
+    .add-card-container .add-card form .input-area textarea {
+        font-size: 14px;
+    }
+
+    .add-card-container .add-card form button {
+        height: 25px;
+        border: 0;
+        font-size: 14px;
+    }
+
+}

@@ -25,3 +25,25 @@
         top: 6%;
     }
 }
+
+/* Break Points */
+
+/* Tablet Screen */
+
+@media (max-width: 768px) and (min-width: 426px) {
+    .add-card-container .add-card {
+        width: 65%;
+    }
+}
+
+/* Smartphone Screen */
+
+@media (max-width: 425px) {
+    .add-card-container .add-card {
+        width: 85%;
+    }
+
+    .add-card-container .add-card .icon-area span {
+        font-size: 16px;
+    }
+}
